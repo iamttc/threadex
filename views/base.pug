@@ -1,0 +1,40 @@
+doctype html
+html(lan = en)
+	head
+		title Threadex
+		link(rel="shortcut icon" href="/favicon.ico" type="image/x-icon")
+		link(rel="icon" href="/favicon.ico" type="image/x-icon")
+		link(href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet")
+		link(rel='stylesheet', href='/style.css')
+		script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
+
+		script(src="https://www.gstatic.com/firebasejs/3.1.0/firebase.js")
+		script(src='/script.js')
+
+	body
+
+		div#alert_box
+
+		header.shadow
+			h1 Threadex
+			p Your personal message thread index
+			nav
+				a(href='/') Home
+				a(href='/t') Threads
+				a(href='/favorites') Favorites
+				a(href='#') Settings
+
+			script.
+				var p = location.pathname;
+				if (p == '/')
+					$('a:nth-child(1)').addClass('current');
+				if (p == '/threads')
+					$('a:nth-child(2)').addClass('current');
+				if (p == '/favorites')
+					$('a:nth-child(3)').addClass('current');
+				if (p == '/user/')
+					$('a:nth-child(4)').addClass('current');
+
+		block sidebar
+
+		// block main extended in sidebar

@@ -1,0 +1,38 @@
+extend sidebar.pug
+
+block main
+	div.item-container
+
+		//- for post in posts.reverse
+		//- 	div.item.shadow
+		//- 		h4 #{post.name}
+		//- 		p #{post.content}
+
+		script.
+			// HORRIBLY SLOW :(
+			function update_favorites(user){
+				var ref = firebase.database().ref('users/' + user.uid + '/favorites');
+				ref.once('value', function(snapshot){
+					snapshot.forEach(function(childsnap){
+						var ref2 = firebase.database().ref(childsnap.val().path);
+						ref2.once('value', function(snap){
+							var link = '/t/' + snap.key;
+							var div = "<div class='item shadow'>" +
+								"<a href='" + link + "'><button class='inline right'>" + link + "</button></a>" +
+								"<h4 class='inline'>" + snap.val().title + "</h4>" +
+								"<p><i style='margin-bottom: 5px'>" + snap.val().favorites + " Favorites</i></p>" +
+								"<p>" + snap.val().desc + "</p></div>";
+							$('.item-container').prepend(div);
+							$('.item:first-child').fadeIn(250);
+						});
+					});
+				});
+			}
+			
+			
+			//- firebase.database().ref(path + '/posts').on('child_added', function(snapshot){
+			//- 	if (flag){
+			//- 		show_box('New Posts. Refresh to see the latest content.', 0);
+			//- 	}
+			//- 	flag = true;
+			//- });

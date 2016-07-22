@@ -1,0 +1,43 @@
+extend sidebar.pug
+
+block main
+	div.item-container
+		div.item.shadow
+			h4 Threadex Registration
+			label(for='create_name') Username
+			input(id='create_name')
+			label(for='create_email') Email
+			input(type='email', id='create_email')
+			label(for='create_password1') Password
+			input(type='password', id='create_password1')
+			label(for='create_password2') Retype Password
+			input(type='password', id='create_password2')
+			button.right(onclick='create_user()') Register
+
+		script.
+			function create_user(){
+				show_box('Registering Account...', 0);
+				var username = $('#create_name').val();
+				var email = $('#create_email').val();
+				var pass1 = $('#create_password1').val();
+				var pass2 = $('#create_password2').val();
+
+				if (pass1 != pass2){
+					show_box('Passwords Don\'t Match', 1);
+					return;
+				}
+				firebase.auth().createUserWithEmailAndPassword(email, pass1)
+					.catch(function(error) {	
+						var errorCode = error.code;
+						var errorMessage = error.message;
+						show_box('Creation Failed: ' + errorMessage, 1);
+				}).then(function(user){
+					show_box('Success. Redirecting to Home.', 0);
+					user.updateProfile({
+						displayName: username
+					});
+					location.pathname = '/';
+				});
+			}
+					
+

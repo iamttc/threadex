@@ -1,0 +1,186 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	text-decoration: none;
+}
+
+body{
+	z-index: 0;
+	background: #eee;
+	font-family: 'Open Sans';
+	font-size: .9em;
+	min-width: 700px;
+}
+.inline{display: inline-block;}
+.left{float:left;}
+.right{float: right;}
+.red{color: red;}
+.shadow{box-shadow: 0px 2px 3px lightgray;}
+
+i{
+	display: inline-block;
+	color: #aaa;
+}
+
+h4{
+	color: #21ce99;
+	margin-bottom: 5px;
+}
+
+/*--------------------------------
+             Flex
+--------------------------------*/
+.flex-container{
+	display: -webkit-flex;
+	display: flex;
+}
+.flex{
+	-webkit-flex: 1;
+	flex: 1;
+}
+.flex:nth-child(1){margin-right: 10px;}
+.flex:nth-child(2){margin-left: 10px;}
+
+
+/*--------------------------------
+             Buttons
+--------------------------------*/
+	button{
+		border: none;
+		padding: 8px 15px;
+		border-radius: 2px;
+		color: white;
+		background: #21ce99;
+		font-size: .9em;
+		transition: .15s all;
+	}
+	button:hover{
+		background: #1ba57b;
+		box-shadow: 0px 3px 4px #bbb;
+	}
+
+
+/*--------------------------------
+             Forms
+--------------------------------*/
+	input, textarea{
+		padding: 7px;
+		width: 100%;
+		font-size: 1em;
+		border: 1px solid #eee;
+		border-radius: 2px;
+		background: #f9f9f9;
+		margin-bottom: 5px;
+	}
+	label{
+		display: block;
+		margin: 10px 0;
+	}
+
+
+/*--------------------------------
+           Alert Box
+--------------------------------*/
+	#alert_box{
+		display: none;
+		position: fixed;
+		z-index: 100;
+		top: 20px;
+		right: 20px;
+		max-width: 400px;
+		padding: 20px;
+		background: black;
+		border: 2px solid;
+		border-radius: 2px;
+	}
+
+
+/*--------------------------------
+         Heading Section
+--------------------------------*/
+	header{
+		display: block;
+		width: 100%;
+		padding: 0 0 7px 40px;	/* for nav underline */
+		background: url('/threadex.png') no-repeat 60% center #222;
+		background-size: 150px;
+		color: #eee;
+	}
+	h1{ padding-top: 80px; }
+	header p{ padding-bottom: 30px; }
+	nav a{
+		padding: 5px 0;
+		margin: 0 20px 0 0;
+		color: #eee;
+		background: transparent;
+		border-radius: 0px;
+		border-bottom: 2px solid transparent;
+		transition: .15s all;
+	}
+	nav a.current{
+		border-color: #21ce99;
+	}
+	nav a:hover{
+		color: white;
+		border-bottom: 2px solid white;
+	}
+	
+
+/*--------------------------------
+           Side Section
+--------------------------------*/
+	.side-container{
+		float: right;
+		margin: -100px 20px 20px;
+		width: 320px;
+	}
+	.side-top{
+		padding: 130px 20px 20px;
+		border-radius: 2px 2px 0 0;
+		background: #21ce99;
+		color: white;
+	}
+	.side-bottom{
+		padding: 20px;
+		border-radius: 0 0 2px 2px;
+		background: white;
+	}
+	.side-bottom .flex:nth-child(1){flex: 10;}
+	.side-item{
+		margin-top: 15px;
+		padding: 20px;
+		border-radius: 2px;
+		background: white;
+		overflow: auto;
+	}
+	.side-item input{width: 200px;}
+	.side-item-clear{margin-top: 15px;}
+	.side-item-clear button{width: 100%;}
+
+	#loginbuttons{display: none;}
+	#login{display: none;}
+	#logoutbutton{display: none;}
+	#createpost{display: none;}
+
+
+/*--------------------------------
+         Content Section
+--------------------------------*/
+	.item-container{
+		padding: 20px;
+		margin-right: 340px;
+	}
+	.item{
+		display: none;
+		overflow: auto;
+		margin-bottom: 15px;
+		padding: 20px;
+		border-radius: 2px;
+		position: relative;
+		background: white;
+	}
+
+	.item p{white-space: pre-wrap;}
+
+

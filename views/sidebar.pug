@@ -1,0 +1,61 @@
+extend base.pug
+
+block sidebar
+
+	div.container
+		div.side-container
+			div.side-top
+				h2
+				script document.getElementsByTagName('h2')[0].innerHTML = location.pathname;
+			div.side-bottom.shadow
+				div.flex-container
+					div.flex
+						h3 #{content.title}
+						if content.favorites != null
+							p #[i#favorites #{content.favorites} Favorites]
+					div.flex
+						if content.favorites != null
+							button#addfav.right.shadow(onclick='add_favorite()') Favorite
+
+			div#loginbuttons.side-item-clear
+				div.flex-container
+					div.flex
+						button(onclick='show_login()').shadow Login
+					div.flex
+						a(href='/user') #[button.shadow Create Account]
+			div#login.side-item.shadow
+				div.flex-container
+					div.flex
+						input(placeholder='email', id='email', type='email')
+						input(placeholder='password', id='password', type='password')
+					div.flex
+						button.right(onclick='login()') Login
+
+			div.side-item.shadow
+				h4 Description
+				p #{content.desc}
+
+			div.side-item-clear
+				div.flex-container
+					div.flex
+						button(onclick='show_post()').shadow Create Post
+					div.flex
+						a(href='/create') #[button.shadow Create Thread]
+
+			div#createpost.side-item.shadow
+				h4 What's on your mind?
+				input(type='hidden', id='postername')
+				textarea(rows='4', id='post')
+				button.right(onclick='submit_post()') Post
+
+			div.side-item.shadow
+				p Threadex is a thread based messaging forum inspired by Reddit. Topics are located at #[code(style='display:inline') ../t/{topic}]
+				p If you can't find the thread you're looking for, create your own!
+			div.side-item.shadow
+				h4 Contact the Developer
+				p Trever Cullen #[br] trevercullen@gmail.com
+
+			div#logoutbutton.side-item-clear
+				button(onclick='logout()') Logout
+
+		block main

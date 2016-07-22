@@ -1,0 +1,36 @@
+extend sidebar.pug
+
+block main
+	div.item-container
+		div.item.shadow
+			h4 Welcome to Threadex
+			p Welcome to Threadex! I hope you enjoy your visit.
+
+		div.item.shadow
+			h4 What is it?
+			p Threadex is a thread based messaging forum. You can find topics you're interested in, share your ideas, and listen to what others have to say!
+
+		div.item.shadow
+			h4 Finding Threads
+			p To find a topic, search the #[i Threads] tab above. Threads are located at #[code ../t/'topic'], so remember that URL!
+
+		div.item.shadow
+			h4 Posting and Subscribing
+			p If you have a Threadex account, you can post and favorite threads for quick access. To create an account, click the button on the right. Don't want to sign up? Don't worry, you can still view any thread you want!
+
+		div.item.shadow
+			h4 Favorites
+			p To save a thread for later, hit the favorites button on the right. All of your favorited threads will show up in your favorites tab. It's like a bookmark right in the site!
+
+		script.
+			$('.item').css('display','none');
+			var delay = 0;
+			setTimeout(function(){
+				$('.item').each(function(){
+					$(this).delay(delay).fadeIn(250);
+					delay += 50;
+				});
+			}, 200);
+			
+
+					

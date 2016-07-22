@@ -1,0 +1,28 @@
+extend sidebar.pug
+
+block main
+	div.item-container
+
+		//- for post in posts.reverse
+		//- 	div.item.shadow
+		//- 		h4 #{post.name}
+		//- 		p #{post.content}
+
+		script.
+			window.onload = function(){
+				var path = location.pathname;
+				var flag = false;
+				firebase.database().ref(path + '/posts').once('value', function(snapshot){
+					snapshot.forEach(function(childsnap){
+						var div = "<div class='item shadow' style='display:none'><h4>" + childsnap.val().name +
+						"</h4><p>" + childsnap.val().content + "</p></div>";
+						$('.item-container').prepend(div);
+					});
+				}).then(function(){
+					var delay = 0;
+					$('.item').each(function(){
+						$(this).delay(delay).fadeIn(250);
+						delay += 50;
+					});
+				});
+			}

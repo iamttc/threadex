@@ -1,0 +1,20 @@
+{
+  "name": "FirstApp",
+  "version": "1.0.0",
+  "description": "Web App",
+  "main": "app.js",
+  "engines": {
+    "node": "4.1.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Trever Cullen",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "firebase": "^3.2.0",
+    "pug": "^2.0.0-beta3"
+  }
+}

@@ -1,0 +1,62 @@
+extend sidebar.pug
+
+block main
+	div.item-container
+		div.item.shadow
+			h4 So you want to create a thread, eh?
+			label(for='title') Title
+			input(id='title')
+			label(for='url') URL Extension #[code ../t/'topic']
+			input(id='url')
+			label(for='desc') Description
+			textarea(id='desc', rows='4')
+			button.right(onclick='create_thread()') Create
+
+		script.
+			function create_thread(){
+				var title = $('#title').val();
+				var url = $('#url').val();
+				var desc = $('#desc').val();
+				show_box('Creating ' + title + '...', 0);
+				var user = firebase.auth().currentUser;
+				if (!user){
+					show_box('You must be logged in to create a thread.', 1);
+					return;
+				}
+				if (title == ''){
+					show_box('Every thread needs a title...', 1);
+					return;
+				}
+				if (url == ''){
+					show_box('Where do you want this thread?', 1);
+					return;
+				}
+				if (desc == ''){
+					show_box('What is this thread about?', 1);
+					return;
+				}
+				var ref = firebase.database().ref('t/' + url);
+				ref.once('value', function(snapshot){
+					if (snapshot.exists()){
+						show_box('This url is already in use.', 1);
+						return;
+					}
+				}).then(function(){
+					ref.set({
+						title: title,
+						desc: desc,
+						favorites: 0
+					});
+					ref.child('posts').push({
+						name: 'Threadex Admin',
+						content: 'Welcome to ' + title + '. This thread was created by ' +
+						user.displayName + ' on ' + Date() + '.',
+						date: Date()
+					}).then(function(){
+						location.pathname = '/t/' + url;
+					});
+				});
+			}
+
+
+

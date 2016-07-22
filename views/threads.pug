@@ -1,0 +1,30 @@
+extend sidebar.pug
+
+block main
+	div.item-container
+
+		//- for thread, idx in threads
+		//- 	div.item.shadow
+		//- 		a(href='/t/' + idx) #[button.inline.right /t/#{idx}]
+		//- 		h4.inline #{thread.title}
+		//- 		p(style='margin-bottom: 5px') #[i #{thread.favorites} Favorites]
+		//- 		p #{thread.desc}
+
+		script.
+			firebase.database().ref('t').once('value', function(snapshot){
+				snapshot.forEach(function(childsnap){
+					var link = '/t/' + childsnap.key;
+					var div = "<div class='item shadow' style='display:none'>" +
+					"<a href='" + link + "'><button class='inline right'>" + link + "</button></a>" +
+					"<h4 class='inline'>" + childsnap.val().title + "</h4>" +
+					"<p><i style='margin-bottom: 5px'>" + childsnap.val().favorites + " Favorites</i></p>" +
+					"<p>" + childsnap.val().desc + "</p></div>";
+					$('.item-container').append(div);
+				});
+			}).then(function(){
+				var delay = 0;
+				$('.item').each(function(){
+					$(this).delay(delay).fadeIn(250);
+					delay += 50;
+				});
+			});
