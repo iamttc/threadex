@@ -8,6 +8,9 @@ firebase.initializeApp(config);
 
 
 window.onload = function(){
+	if (location.pathname == '/create' ||
+		location.pathname == '/user')
+		$('.item').show(0);
 	firebase.auth().onAuthStateChanged(function(user) {
 		if (user) {
 			$('#logoutbutton').show(600);
