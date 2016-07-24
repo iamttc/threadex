@@ -2,10 +2,9 @@ extend sidebar.pug
 
 block main
 	.item-container
-		//- for post in posts.reverse
-		//- 	div.item.shadow
-		//- 		h4 #{post.name}
-		//- 		p #{post.content}
+		.large-image-view
+			button.right(onclick='hide_image()') X
+			img
 
 		script.
 			var thread = location.pathname.replace('/t/', '');
@@ -50,5 +49,19 @@ block main
 					$('.item-container').prepend(div);
 				});
 			}).then(function(){
-				show_result_set()
+				show_result_set();
+				$('.post-image').click(function(){
+					var container = $('.large-image-view');
+					$('.large-image-view img').attr('src', this.src);
+					container.fadeIn(300);
+				});
 			});
+
+			function hide_image(){
+				$('.large-image-view').fadeOut(300, function(){
+					$('.large-image-view').css('display', 'none');
+				});
+			}
+
+
+			

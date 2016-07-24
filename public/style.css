@@ -177,7 +177,6 @@ h4{
 		margin-bottom: 15px;
 		padding: 20px;
 		border-radius: 2px;
-		position: relative;
 		background: white;
 	}
 	.item p{white-space: pre-wrap;}
@@ -190,6 +189,21 @@ h4{
 		height: 50px;
 		top: 0;
 		left: 0;
+	}
+	.large-image-view{
+		overflow: auto;
+		display: none;
+		position: fixed;
+		bottom: 20px; right: 20px;
+		width: auto;
+		padding: 20px;
+		background: #222;
+		max-width: 50%;
+		border-radius: 2px;
+	}
+	.large-image-view img{
+		max-width: 90%;
+		max-height: 50vh;
 	}
 
 /*--------------------------------
