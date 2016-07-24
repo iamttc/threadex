@@ -15,6 +15,7 @@ block main
 			button.right(onclick='create_user()') Register
 
 		script.
+			show_result_set();
 			function create_user(){
 				show_box('Registering Account...', 0);
 				var username = $('#create_name').val();

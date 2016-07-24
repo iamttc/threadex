@@ -16,6 +16,7 @@ window.onload = function(){
 		} else {
 			$('#loginbuttons').show(600);
 			if (location.pathname == '/favorites'){
+				show_box('Must be logged in to see favorites.', 1);
 				var delay = 0;
 				$('.item').each(function(){
 					$(this).delay(delay).fadeOut(250);
