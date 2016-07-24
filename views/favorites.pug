@@ -11,28 +11,29 @@ block main
 		script.
 			// HORRIBLY SLOW :(
 			function update_favorites(user){
-				var ref = firebase.database().ref('users/' + user.uid + '/favorites');
+				var paths = [];
+				var ref = firebase.database().ref('favorites/' + user.uid);
 				ref.once('value', function(snapshot){
 					snapshot.forEach(function(childsnap){
-						var ref2 = firebase.database().ref(childsnap.val().path);
-						ref2.once('value', function(snap){
-							var link = '/t/' + snap.key;
+						paths.push(childsnap.val().path);
+					});
+				}).then(function(){
+					var ref = firebase.database().ref('t');
+					ref.once('value', function(snapshot){
+						var val = snapshot.val();
+						console.log(Object.keys(val));
+						for (i = 0; i < paths.length; ++i){
+							var x = paths[i];
+							var link = '/t/' + x;
 							var div = "<div class='item shadow'>" +
 								"<a href='" + link + "'><button class='inline right'>" + link + "</button></a>" +
-								"<h4 class='inline'>" + snap.val().title + "</h4>" +
-								"<p><i style='margin-bottom: 5px'>" + snap.val().favorites + " Favorites</i></p>" +
-								"<p>" + snap.val().desc + "</p></div>";
+								"<h4 class='inline'>" + val[x].title + "</h4>" +
+								"<p><i style='margin-bottom: 5px'>" + val[x].favorites + " Favorites</i></p>" +
+								"<p>" + val[x].desc + "</p></div>\n";
 							$('.item-container').prepend(div);
-							$('.item:first-child').fadeIn(250);
-						});
+						}
+					}).then(function(){
+						show_result_set();
 					});
 				});
 			}
-			
-			
-			//- firebase.database().ref(path + '/posts').on('child_added', function(snapshot){
-			//- 	if (flag){
-			//- 		show_box('New Posts. Refresh to see the latest content.', 0);
-			//- 	}
-			//- 	flag = true;
-			//- });

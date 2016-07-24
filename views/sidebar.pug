@@ -44,8 +44,8 @@ block sidebar
 
 			div#createpost.side-item.shadow
 				h4 What's on your mind?
-				input(type='hidden', id='postername')
 				textarea(rows='4', id='post')
+				input(type='file', id='img')
 				button.right(onclick='submit_post()') Post
 
 			div.side-item.shadow
@@ -58,4 +58,8 @@ block sidebar
 			div#logoutbutton.side-item-clear
 				button(onclick='logout()') Logout
 
+		div.loading
+			div.loading-circle
+			div.loading-circle
+			div.loading-circle
 		block main

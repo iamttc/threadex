@@ -1,17 +1,17 @@
 extend sidebar.pug
 
 block main
-	div.item-container
-
+	.item-container
 		//- for post in posts.reverse
 		//- 	div.item.shadow
 		//- 		h4 #{post.name}
 		//- 		p #{post.content}
 
 		script.
-			var path = location.pathname;
-			var date = new Date();
-			firebase.database().ref(path + '/posts').once('value', function(snapshot){
+			var thread = location.pathname.replace('/t/', '');
+			var ref = firebase.database().ref('posts/' + thread);
+			ref.once('value', function(snapshot){
+				var date = new Date();
 				snapshot.forEach(function(childsnap){
 					var diff = Math.round((date - new Date(childsnap.val().date)) / (1000 * 60));	// minutes
 					var timediff;
@@ -36,15 +36,11 @@ block main
 						timediff = timediff.substring(0, pos) + timediff.substring(pos+1);
 					}
 					var div = "<div class='item shadow'>" + 
-					"<i class='right'>" + timediff + "</i>" +
+					"<i class='right'>" + timediff + "</i>" + 
 					"<h4>" + childsnap.val().name + "</h4>" + 
-					"<p>" + childsnap.val().content + "</p></div>";
+					"<p>" + childsnap.val().content + "</p></div>\n";
 					$('.item-container').prepend(div);
 				});
 			}).then(function(){
-				var delay = 0;
-				$('.item').each(function(){
-					$(this).delay(delay).fadeIn(250);
-					delay += 50;
-				});
+				show_result_set()
 			});

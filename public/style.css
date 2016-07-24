@@ -31,16 +31,16 @@ h4{
 /*--------------------------------
              Flex
 --------------------------------*/
-.flex-container{
-	display: -webkit-flex;
-	display: flex;
-}
-.flex{
-	-webkit-flex: 1;
-	flex: 1;
-}
-.flex:nth-child(1){margin-right: 10px;}
-.flex:nth-child(2){margin-left: 10px;}
+	.flex-container{
+		display: -webkit-flex;
+		display: flex;
+	}
+	.flex{
+		-webkit-flex: 1;
+		flex: 1;
+	}
+	.flex:nth-child(1){margin-right: 10px;}
+	.flex:nth-child(2){margin-left: 10px;}
 
 
 /*--------------------------------
@@ -102,7 +102,7 @@ h4{
 	header{
 		display: block;
 		width: 100%;
-		padding: 0 0 7px 40px;	/* for nav underline */
+		padding: 0 0 8px 40px;	/* for nav underline */
 		background: url('/threadex.png') no-repeat 60% center #222;
 		background-size: 150px;
 		color: #eee;
@@ -115,7 +115,7 @@ h4{
 		color: #eee;
 		background: transparent;
 		border-radius: 0px;
-		border-bottom: 2px solid transparent;
+		border-bottom: 3px solid transparent;
 		transition: .15s all;
 	}
 	nav a.current{
@@ -123,7 +123,7 @@ h4{
 	}
 	nav a:hover{
 		color: white;
-		border-bottom: 2px solid white;
+		border-bottom: 3px solid white;
 	}
 	
 
@@ -182,5 +182,36 @@ h4{
 	}
 
 	.item p{white-space: pre-wrap;}
+
+/*--------------------------------
+         Loading Bar
+--------------------------------*/
+	.loading{
+		padding: 20px;
+		text-align: center;
+	}
+	.loading-circle{
+		display: inline-block;
+		height: 10px; width: 10px;
+		background: #222;
+		border-radius: 5px;
+		margin: 5px;
+		animation: load .6s ease-in-out 0s infinite alternate;
+	}
+	.loading-circle:nth-child(1) { animation-delay: 0s; }
+	.loading-circle:nth-child(2) { animation-delay: .2s; }
+	.loading-circle:nth-child(3) { animation-delay: .4s; }
+
+	@keyframes load {
+		0% { transform: scale(1); }
+  		30% { transform: scale(1); }
+  		100% { transform: scale(1.5);
+  			opacity: .5;
+  		}
+	}
+
+
+
+
 
 

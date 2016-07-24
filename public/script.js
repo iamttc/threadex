@@ -8,9 +8,6 @@ firebase.initializeApp(config);
 
 
 window.onload = function(){
-	if (location.pathname == '/create' ||
-		location.pathname == '/user')
-		$('.item').show(0);
 	firebase.auth().onAuthStateChanged(function(user) {
 		if (user) {
 			$('#logoutbutton').show(600);
@@ -18,6 +15,14 @@ window.onload = function(){
 				update_favorites(user);
 		} else {
 			$('#loginbuttons').show(600);
+			if (location.pathname == '/favorites'){
+				var delay = 0;
+				$('.item').each(function(){
+					$(this).delay(delay).fadeOut(250);
+					delay += 50;
+				});
+				$('.item').remove();
+			}
 		}
 	});
 };
@@ -72,19 +77,29 @@ function show_post(){
 	else show_box('Oops! Can\'t Post Here.', 1);
 }
 function submit_post(){
-	var path = location.pathname;
 	var content = $('#post').val();
 	if (content == ''){
 		show_box('You Can\'t Submit an Empty Post!', 1);
 		return;
 	}
-	var ref = firebase.database().ref(path);
-	ref.child('posts').push({
+	var ref = firebase.database().ref('posts');
+	var thread = location.pathname.replace('/t/', '');
+	ref.child(thread).push({
 		name: firebase.auth().currentUser.displayName,
 		content: content,
 		date: Date()
 	}).then(function(){
 		location.reload();
+	});
+}
+
+// RESULT SETS
+function show_result_set(){
+	$('.loading').hide();
+	var delay = 0;
+	$('.item').each(function(){
+		$(this).delay(delay).fadeIn(250);
+		delay += 50;
 	});
 }
 
@@ -101,9 +116,7 @@ function not_in_favorites(ref, path){
 		});
 	}).then(function(){
 		if (flag){
-			ref.push({
-				path: path
-			});
+			ref.push({ path: path.replace('/t/', '') });
 			var favs;
 			ref = firebase.database().ref(path);
 			ref.once('value', function(snapshot){
@@ -125,7 +138,9 @@ function add_favorite(){
 		return;
 	}
 	var path = location.pathname;
-	var ref = firebase.database().ref('users/' + user.uid + '/favorites');
+	var ref = firebase.database().ref('favorites/' + user.uid);
 	not_in_favorites(ref, path);
 }
+
+
 

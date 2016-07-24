@@ -18,13 +18,9 @@ block main
 					"<a href='" + link + "'><button class='inline right'>" + link + "</button></a>" +
 					"<h4 class='inline'>" + childsnap.val().title + "</h4>" +
 					"<p><i style='margin-bottom: 5px'>" + childsnap.val().favorites + " Favorites</i></p>" +
-					"<p>" + childsnap.val().desc + "</p></div>";
+					"<p>" + childsnap.val().desc + "</p></div>\n";
 					$('.item-container').append(div);
 				});
 			}).then(function(){
-				var delay = 0;
-				$('.item').each(function(){
-					$(this).delay(delay).fadeIn(250);
-					delay += 50;
-				});
+				show_result_set();
 			});
