@@ -103,7 +103,7 @@ h4{
 		display: block;
 		width: 100%;
 		padding: 0 0 8px 40px;	/* for nav underline */
-		background: url('/threadex.png') no-repeat 60% center #222;
+		background: url('/threadex.png') no-repeat right 400px center #222;
 		background-size: 150px;
 		color: #eee;
 	}
@@ -180,8 +180,17 @@ h4{
 		position: relative;
 		background: white;
 	}
-
 	.item p{white-space: pre-wrap;}
+	.image-wrapper{
+		overflow: hidden;
+		width: 50px;
+		height: 50px;
+	}
+	.post-image{
+		height: 50px;
+		top: 0;
+		left: 0;
+	}
 
 /*--------------------------------
          Loading Bar

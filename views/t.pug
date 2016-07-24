@@ -35,10 +35,18 @@ block main
 						var pos = timediff.lastIndexOf('s');
 						timediff = timediff.substring(0, pos) + timediff.substring(pos+1);
 					}
+					var val = childsnap.val();
 					var div = "<div class='item shadow'>" + 
+					"<div class='flex-container'><div style='width: 60px'>";
+					if (val.imgurl != null)
+						div += "<div class='image-wrapper'><img class='post-image' src='" + val.imgurl + "'></div>";
+					div += "</div><div class='flex'>" + 
+					
 					"<i class='right'>" + timediff + "</i>" + 
-					"<h4>" + childsnap.val().name + "</h4>" + 
-					"<p>" + childsnap.val().content + "</p></div>\n";
+					"<h4>" + val.name + "</h4>" + 
+					"<p>" + val.content + "</p>";
+					
+					div += "</div></div>\n";
 					$('.item-container').prepend(div);
 				});
 			}).then(function(){

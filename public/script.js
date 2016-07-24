@@ -76,21 +76,38 @@ function show_post(){
 	}
 	else show_box('Oops! Can\'t Post Here.', 1);
 }
-function submit_post(){
-	var content = $('#post').val();
-	if (content == ''){
-		show_box('You Can\'t Submit an Empty Post!', 1);
-		return;
-	}
+function finish_post(content, imgurl){
+	console.log(imgurl);
 	var ref = firebase.database().ref('posts');
 	var thread = location.pathname.replace('/t/', '');
 	ref.child(thread).push({
 		name: firebase.auth().currentUser.displayName,
 		content: content,
-		date: Date()
+		date: Date(),
+		imgurl: imgurl
 	}).then(function(){
 		location.reload();
 	});
+}
+function submit_post(){
+	var content = $('#post').val();
+	if (content == ''){
+		show_box('Please provide some text for your post!', 1);
+		return;
+	}
+	var img = document.getElementById('img');
+	if (img.files.length != 0){
+		var file = img.files[0];
+		var fileref = firebase.storage().ref('images').child(file.name).put(file);
+		fileref.on('state_changed', function(snapshot){
+		}, function(error) {
+			show_box('Upload Failed: ' + error.message, 1);
+		}, function() {
+			finish_post(content, fileref.snapshot.downloadURL);
+		});
+	} else{
+		finish_post(content, null);
+	}
 }
 
 // RESULT SETS
