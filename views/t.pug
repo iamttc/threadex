@@ -2,7 +2,7 @@ extend sidebar.pug
 
 block main
 	.item-container
-		.large-image-view
+		.large-image-view.shadow
 			button.right(onclick='hide_image()') X
 			img
 
@@ -56,12 +56,6 @@ block main
 					container.fadeIn(300);
 				});
 			});
-
-			function hide_image(){
-				$('.large-image-view').fadeOut(300, function(){
-					$('.large-image-view').css('display', 'none');
-				});
-			}
 
 
 			

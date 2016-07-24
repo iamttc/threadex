@@ -121,6 +121,11 @@ function show_result_set(){
 		delay += 50;
 	});
 }
+function hide_image(){
+	$('.large-image-view').fadeOut(300, function(){
+		$('.large-image-view').css('display', 'none');
+	});
+}
 
 // FAVORITES STUFF
 function not_in_favorites(ref, path){
