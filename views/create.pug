@@ -13,12 +13,7 @@ block main
 			button.right(onclick='create_thread()') Create
 
 		script.
-			function create_thread(){
-				var title = $('#title').val();
-				var url = $('#url').val();
-				var desc = $('#desc').val();
-				show_box('Creating ' + title + '...', 0);
-				var user = firebase.auth().currentUser;
+			function check_create_inputs(user){
 				if (!user){
 					show_box('You must be logged in to create a thread.', 1);
 					return;
@@ -35,6 +30,14 @@ block main
 					show_box('What is this thread about?', 1);
 					return;
 				}
+			}
+			function create_thread(){
+				var title = $('#title').val();
+				var url = $('#url').val();
+				var desc = $('#desc').val();
+				show_box('Creating ' + title + '...', 0);
+				var user = firebase.auth().currentUser;
+				
 				var ref = firebase.database().ref('t/' + url);
 				ref.once('value', function(snapshot){
 					if (snapshot.exists()){

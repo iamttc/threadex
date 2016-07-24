@@ -10,11 +10,35 @@ block main
 
 		script.
 			var path = location.pathname;
-			var flag = false;
+			var date = new Date();
 			firebase.database().ref(path + '/posts').once('value', function(snapshot){
 				snapshot.forEach(function(childsnap){
-					var div = "<div class='item shadow' style='display:none'><h4>" + childsnap.val().name +
-					"</h4><p>" + childsnap.val().content + "</p></div>";
+					var diff = Math.round((date - new Date(childsnap.val().date)) / (1000 * 60));	// minutes
+					var timediff;
+					if (diff < 60)
+						timediff = diff + ' minutes ago';
+					else {
+						diff = Math.round(diff / 60);	// hours
+						if (diff < 24)
+							timediff = diff + ' hours ago';
+						else {
+							diff = Math.round(diff / 24);	// days
+							if (diff < 365)
+								timediff = diff + ' days ago';
+							else{
+								diff = Math.round(diff / 365);	// years
+								timediff = diff + ' years ago';
+							}
+						}
+					}
+					if (diff == 1){
+						var pos = timediff.lastIndexOf('s');
+						timediff = timediff.substring(0, pos) + timediff.substring(pos+1);
+					}
+					var div = "<div class='item shadow'>" + 
+					"<i class='right'>" + timediff + "</i>" +
+					"<h4>" + childsnap.val().name + "</h4>" + 
+					"<p>" + childsnap.val().content + "</p></div>";
 					$('.item-container').prepend(div);
 				});
 			}).then(function(){
