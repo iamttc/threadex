@@ -91,6 +91,7 @@ function finish_post(content, imgurl){
 	});
 }
 function submit_post(){
+	show_box('Submitting Post...', 0);
 	var content = $('#post').val();
 	if (content == ''){
 		show_box('Please provide some text for your post!', 1);
