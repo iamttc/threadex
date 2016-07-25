@@ -67,9 +67,7 @@ block main
 						new_items = true;
 					});
 				});
-			}
-
-			
+			}		
 
 			var thread = location.pathname.replace('/t/', '');
 			var ref = firebase.database().ref('posts/' + thread);
@@ -108,6 +106,12 @@ block main
 					var container = $('.large-image-view');
 					$('.large-image-view img').attr('src', this.src);
 					container.fadeIn(300);
+				});
+
+				$('.item').hover(function(){
+					$(this).addClass('item-hover');
+				}, function(){
+					$(this).removeClass('item-hover');
 				});
 
 				// this really looks like ass lol
