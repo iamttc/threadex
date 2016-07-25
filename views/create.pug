@@ -14,7 +14,14 @@ block main
 
 		script.
 			show_result_set();
-			function check_create_inputs(user){
+			function create_thread(){
+				var title = $('#title').val();
+				var url = $('#url').val();
+				var desc = $('#desc').val();
+				show_box('Creating ' + title + '...', 0);
+				var user = firebase.auth().currentUser;
+				
+				// validate inputs
 				if (!user){
 					show_box('You must be logged in to create a thread.', 1);
 					return;
@@ -31,16 +38,9 @@ block main
 					show_box('What is this thread about?', 1);
 					return;
 				}
-			}
-			function create_thread(){
-				var title = $('#title').val();
-				var url = $('#url').val();
-				var desc = $('#desc').val();
-				show_box('Creating ' + title + '...', 0);
-				var user = firebase.auth().currentUser;
-				
+
+				console.log('here');
 				var ref = firebase.database().ref('t').child(url);
-				return;
 				ref.once('value', function(snapshot){
 					if (snapshot.exists()){
 						show_box('This url is already in use.', 1);
@@ -52,7 +52,8 @@ block main
 						desc: desc,
 						favorites: 0
 					});
-					ref.child('posts').push({
+					var ref2 = firebase.database().ref('posts').child(url);
+					ref2.push({
 						name: 'Threadex Admin',
 						content: 'Welcome to ' + title + '. This thread was created by ' +
 						user.displayName + ' on ' + Date() + '.',

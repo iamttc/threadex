@@ -20,14 +20,15 @@ router.get('/', function(req, res){
 	});
 });
 
-// router.get('/:name', function(req, res) {
-// 	var ref = db.ref('/t' + req.url);
-// 	ref.on('value', function(snapshot) {
-// 	 	res.render('t', {
-// 			content: snapshot.val()
-// 		});
-// 	});
-// });
+router.get('/:name', function(req, res) {
+	content = {
+		title: 'Account',
+		desc: 'View and edit your account information.'
+	};
+	res.render('account', {
+		content: content
+	});
+});
 
 
 module.exports = router;
