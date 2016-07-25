@@ -39,7 +39,8 @@ block main
 				show_box('Creating ' + title + '...', 0);
 				var user = firebase.auth().currentUser;
 				
-				var ref = firebase.database().ref('t/' + url);
+				var ref = firebase.database().ref('t').child(url);
+				return;
 				ref.once('value', function(snapshot){
 					if (snapshot.exists()){
 						show_box('This url is already in use.', 1);
