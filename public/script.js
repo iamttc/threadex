@@ -128,21 +128,21 @@ function hide_image(){
 }
 
 // FAVORITES STUFF
-function not_in_favorites(ref, path){
-	flag = true;
-	ref.once('value', function(snapshot){
-		snapshot.forEach(function(snap){
-			if (snap.val().path == path){
-				show_box('This thread is already in your favorites.', 1);
-				flag = false;
-				return;
-			}
-		});
-	}).then(function(){
-		if (flag){
-			ref.push({ path: path.replace('/t/', '') });
+function add_favorite(){
+	var user = firebase.auth().currentUser;
+	if (!user){
+		show_box('Login to favorite threads.', 1);
+		return;
+	}
+	var path = location.pathname.replace('/t/', '');
+	var ref = firebase.database().ref('favorites/' + user.uid);
+	ref.orderByChild('path').equalTo(path).once('value', function(snapshot){
+		if (snapshot.exists()){
+			show_box('This thread is already in your favorites.', 1);
+		} else {
+			ref.push({ path: path });
 			var favs;
-			ref = firebase.database().ref(path);
+			ref = firebase.database().ref('t/' + path);
 			ref.once('value', function(snapshot){
 				favs = snapshot.val().favorites + 1;
 				ref.update({
@@ -152,18 +152,8 @@ function not_in_favorites(ref, path){
 					show_box(snapshot.val().title + ' added to favorites.', 0);
 				});
 			});
-		};
+		}
 	});
-}
-function add_favorite(){
-	var user = firebase.auth().currentUser;
-	if (!user){
-		show_box('Login to favorite threads.', 1);
-		return;
-	}
-	var path = location.pathname;
-	var ref = firebase.database().ref('favorites/' + user.uid);
-	not_in_favorites(ref, path);
 }
 
 
