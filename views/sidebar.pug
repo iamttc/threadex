@@ -15,21 +15,21 @@ block sidebar
 							p #[i#favorites #{content.favorites} Favorites]
 					div.flex
 						if content.favorites != null
-							button#addfav.right.shadow(onclick='add_favorite()') Favorite
+							button#addfav.right(onclick='add_favorite()') Favorite
 
 			div#loginbuttons.side-item-clear
 				div.flex-container
 					div.flex
-						button.shadow(onclick='show_login()') Login
+						button(onclick='show_login()') Login
 					div.flex
-						a(href='/user') #[button.shadow Create Account]
+						a(href='/user') #[button Create Account]
 			div#login.side-item.shadow
 				div.flex-container
 					div.flex
 						input(placeholder='email', id='email', type='email')
 						input(placeholder='password', id='password', type='password')
 					div.flex
-						button.shadow.right(onclick='login()') Login
+						button.right(onclick='login()') Login
 
 			div.side-item.shadow
 				h4 Description
@@ -38,15 +38,15 @@ block sidebar
 			div.side-item-clear
 				div.flex-container
 					div.flex
-						button.shadow(onclick='show_post()') Create Post
+						button(onclick='show_post()') Create Post
 					div.flex
-						a(href='/create') #[button.shadow Create Thread]
+						a(href='/create') #[button Create Thread]
 
 			div#createpost.side-item.shadow
 				h4 What's on your mind?
 				textarea(rows='4', id='post')
 				input(type='file', id='img', accept='image/*')
-				button.shadow.right(onclick='submit_post()') Post
+				button.right(onclick='submit_post()') Post
 
 			div.side-item.shadow
 				p Threadex is a thread based messaging forum inspired by Reddit. Topics are located at #[code(style='display:inline') ../t/{topic}]
@@ -56,7 +56,7 @@ block sidebar
 				p Trever Cullen #[br] trevercullen@gmail.com
 
 			div#logoutbutton.side-item-clear
-				button.shadow(onclick='logout()') Logout
+				button(onclick='logout()') Logout
 
 		div.loading
 			div.loading-circle

@@ -3,13 +3,6 @@ extend sidebar.pug
 block main
 	div.item-container
 
-		//- for thread, idx in threads
-		//- 	div.item.shadow
-		//- 		a(href='/t/' + idx) #[button.inline.right /t/#{idx}]
-		//- 		h4.inline #{thread.title}
-		//- 		p(style='margin-bottom: 5px') #[i #{thread.favorites} Favorites]
-		//- 		p #{thread.desc}
-
 		script.
 			firebase.database().ref('t').once('value', function(snapshot){
 				snapshot.forEach(function(childsnap){
