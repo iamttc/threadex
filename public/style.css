@@ -12,6 +12,10 @@ body{
 	font-size: .9em;
 	min-width: 700px;
 }
+.container{
+	max-width: 1100px;
+	margin: 0 auto;
+}
 .inline{display: inline-block;}
 .left{float:left;}
 .right{float: right;}
@@ -29,7 +33,7 @@ h4{
 }
 
 /*--------------------------------
-             Flex
+              Flex
 --------------------------------*/
 	.flex-container{
 		display: -webkit-flex;
@@ -44,66 +48,13 @@ h4{
 
 
 /*--------------------------------
-             Buttons
---------------------------------*/
-	button{
-		border: none;
-		padding: 8px 15px;
-		border-radius: 2px;
-		color: white;
-		background: #21ce99;
-		font-size: .9em;
-		transition: .15s all;
-	}
-	button:hover{
-		background: #1ba57b;
-		box-shadow: 0px 3px 4px #bbb;
-	}
-
-
-/*--------------------------------
-             Forms
---------------------------------*/
-	input, textarea{
-		padding: 7px;
-		width: 100%;
-		font-size: 1em;
-		border: 1px solid #eee;
-		border-radius: 2px;
-		background: #f9f9f9;
-		margin-bottom: 5px;
-	}
-	label{
-		display: block;
-		margin: 10px 0;
-	}
-
-
-/*--------------------------------
-           Alert Box
---------------------------------*/
-	#alert_box{
-		display: none;
-		position: fixed;
-		z-index: 100;
-		top: 20px;
-		right: 20px;
-		max-width: 400px;
-		padding: 20px;
-		background: black;
-		border: 2px solid;
-		border-radius: 2px;
-	}
-
-
-/*--------------------------------
          Heading Section
 --------------------------------*/
 	header{
 		display: block;
 		width: 100%;
 		padding: 0 0 8px 40px;	/* for nav underline */
-		background: url('/threadex.png') no-repeat right 400px center #222;
+		background: url('/threadex.png') no-repeat center center #222;
 		background-size: 150px;
 		color: #eee;
 	}
@@ -223,6 +174,7 @@ h4{
 		border-bottom: 1px solid #eee;
 	}
 
+
 /*--------------------------------
          Loading Bar
 --------------------------------*/
@@ -249,6 +201,63 @@ h4{
   			opacity: .5;
   		}
 	}
+
+
+/*--------------------------------
+           Alert Box
+--------------------------------*/
+	#alert_box{
+		display: none;
+		position: fixed;
+		z-index: 100;
+		top: 20px;
+		right: 20px;
+		max-width: 400px;
+		padding: 20px;
+		background: black;
+		border: 2px solid;
+		border-radius: 2px;
+	}
+
+
+/*--------------------------------
+             Buttons
+--------------------------------*/
+	button{
+		border: none;
+		padding: 8px 15px;
+		border-radius: 2px;
+		color: white;
+		background: #21ce99;
+		font-size: .9em;
+		transition: .15s all;
+	}
+	button:hover{
+		background: #1ba57b;
+		box-shadow: 0px 3px 4px #bbb;
+	}
+
+
+/*--------------------------------
+             Forms
+--------------------------------*/
+	input, textarea{
+		padding: 7px;
+		width: 100%;
+		font-size: 1em;
+		border: 1px solid #eee;
+		border-radius: 2px;
+		background: #f9f9f9;
+		margin-bottom: 5px;
+	}
+	label{
+		display: block;
+		margin: 10px 0;
+	}
+
+
+
+
 
 
 

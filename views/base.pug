@@ -16,24 +16,25 @@ html(lan = en)
 		div#alert_box
 
 		header.shadow
-			h1 Threadex #[i Beta]
-			p Your favorite message thread index
-			nav
-				a(href='/') Home
-				a(href='/t') Threads
-				a(href='/favorites') Favorites
-				a(href='/user/uid') Settings
+			div.container
+				h1 Threadex #[i Beta]
+				p Your favorite message thread index
+				nav
+					a(href='/') Home
+					a(href='/t') Threads
+					a(href='/favorites') Favorites
+					a(href='/user/uid') Settings
 
-			script.
-				var p = location.pathname;
-				if (p == '/')
-					$('a:nth-child(1)').addClass('current');
-				if (p == '/threads')
-					$('a:nth-child(2)').addClass('current');
-				if (p == '/favorites')
-					$('a:nth-child(3)').addClass('current');
-				if (p == '/user/')
-					$('a:nth-child(4)').addClass('current');
+				script.
+					var p = location.pathname;
+					if (p == '/')
+						$('a:nth-child(1)').addClass('current');
+					if (p == '/threads')
+						$('a:nth-child(2)').addClass('current');
+					if (p == '/favorites')
+						$('a:nth-child(3)').addClass('current');
+					if (p == '/user/')
+						$('a:nth-child(4)').addClass('current');
 
 		block sidebar
 
