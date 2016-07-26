@@ -43,28 +43,28 @@ block main
 					return;
 				}
 				else{
-					return;
 					var ref = firebase.database().ref('t').child(url);
 					ref.once('value', function(snapshot){
 						if (snapshot.exists()){
 							show_box('This url is already in use.', 1);
-							return;
+						}else{
+							ref.set({
+								title: title,
+								desc: desc,
+								favorites: 0
+							});
+							var ref2 = firebase.database().ref('posts').child(url);
+							ref2.push({
+								name: 'Threadex Admin',
+								content: 'Welcome to ' + title + '. This thread was created by ' +
+								user.displayName + ' on ' + Date() + '.',
+								date: Date()
+							}).then(function(){
+								setTimeout(function(){
+									location.pathname = '/t/' + url;
+								}, 750);
+							});
 						}
-					}).then(function(){
-						ref.set({
-							title: title,
-							desc: desc,
-							favorites: 0
-						});
-						var ref2 = firebase.database().ref('posts').child(url);
-						ref2.push({
-							name: 'Threadex Admin',
-							content: 'Welcome to ' + title + '. This thread was created by ' +
-							user.displayName + ' on ' + Date() + '.',
-							date: Date()
-						}).then(function(){
-							location.pathname = '/t/' + url;
-						});
 					});
 				}
 			}
