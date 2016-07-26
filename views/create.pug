@@ -5,9 +5,9 @@ block main
 		div.item.shadow
 			h4 So you want to create a thread, eh?
 			label(for='title') Title
-			input(id='title')
-			label(for='url') URL Extension #[code ../t/'topic']
-			input(id='url')
+			input(id='title', placeholder='My New Thread')
+			label(for='url') Topic #[i  ] (AlphaNumeric Only)
+			input(id='url', placeholder='../t/ \'topic\'')
 			label(for='desc') Description
 			textarea(id='desc', rows='4')
 			button.right(onclick='create_thread()') Create
@@ -26,41 +26,47 @@ block main
 					show_box('Login to create a thread.', 1);
 					return;
 				}
-				if (title == ''){
+				else if (title == ''){
 					show_box('Title can\'t be empty.', 1);
 					return;
 				}
-				if (url == ''){
+				else if (url == ''){
 					show_box('Topic can\'t be empty.', 1);
 					return;
 				}
-				if (desc == ''){
+				else if (!/^[a-zA-Z0-9]+$/.test(url)){
+					show_box('Topic contains invalid characters.', 1);
+					return;
+				}
+				else if (desc == ''){
 					show_box('Description can\'t be empty.', 1);
 					return;
 				}
-
-				var ref = firebase.database().ref('t').child(url);
-				ref.once('value', function(snapshot){
-					if (snapshot.exists()){
-						show_box('This url is already in use.', 1);
-						return;
-					}
-				}).then(function(){
-					ref.set({
-						title: title,
-						desc: desc,
-						favorites: 0
-					});
-					var ref2 = firebase.database().ref('posts').child(url);
-					ref2.push({
-						name: 'Threadex Admin',
-						content: 'Welcome to ' + title + '. This thread was created by ' +
-						user.displayName + ' on ' + Date() + '.',
-						date: Date()
+				else{
+					return;
+					var ref = firebase.database().ref('t').child(url);
+					ref.once('value', function(snapshot){
+						if (snapshot.exists()){
+							show_box('This url is already in use.', 1);
+							return;
+						}
 					}).then(function(){
-						location.pathname = '/t/' + url;
+						ref.set({
+							title: title,
+							desc: desc,
+							favorites: 0
+						});
+						var ref2 = firebase.database().ref('posts').child(url);
+						ref2.push({
+							name: 'Threadex Admin',
+							content: 'Welcome to ' + title + '. This thread was created by ' +
+							user.displayName + ' on ' + Date() + '.',
+							date: Date()
+						}).then(function(){
+							location.pathname = '/t/' + url;
+						});
 					});
-				});
+				}
 			}
 
 
