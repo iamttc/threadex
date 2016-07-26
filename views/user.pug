@@ -33,7 +33,7 @@ block main
 						var errorMessage = error.message;
 						show_box('Creation Failed: ' + errorMessage, 1);
 				}).then(function(user){
-					show_box('Success. Redirecting to Home.', 0);
+					show_box('Success. Redirecting...', 0);
 					user.updateProfile({
 						displayName: username
 					});

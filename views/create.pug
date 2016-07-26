@@ -23,23 +23,22 @@ block main
 				
 				// validate inputs
 				if (!user){
-					show_box('You must be logged in to create a thread.', 1);
+					show_box('Login to create a thread.', 1);
 					return;
 				}
 				if (title == ''){
-					show_box('Every thread needs a title...', 1);
+					show_box('Title can\'t be empty.', 1);
 					return;
 				}
 				if (url == ''){
-					show_box('Where do you want this thread?', 1);
+					show_box('Topic can\'t be empty.', 1);
 					return;
 				}
 				if (desc == ''){
-					show_box('What is this thread about?', 1);
+					show_box('Description can\'t be empty.', 1);
 					return;
 				}
 
-				console.log('here');
 				var ref = firebase.database().ref('t').child(url);
 				ref.once('value', function(snapshot){
 					if (snapshot.exists()){

@@ -16,7 +16,7 @@ window.onload = function(){
 		} else {
 			$('#loginbuttons').show(600);
 			if (location.pathname == '/favorites'){
-				show_box('Must be logged in to see favorites.', 1);
+				show_box('Login to see favorites.', 1);
 				var delay = 0;
 				$('.item').each(function(){
 					$(this).delay(delay).fadeOut(250);
@@ -73,9 +73,9 @@ function show_post(){
 	if (location.pathname.includes('/t/')){
 		if (firebase.auth().currentUser)
 			$('#createpost').toggle(600);
-		else show_box('You must be logged in to post!', 1);
+		else show_box('Login to post.', 1);
 	}
-	else show_box('Oops! Can\'t Post Here.', 1);
+	else show_box('Oops! Can\'t post here.', 1);
 }
 function finish_post(content, imgurl){
 	console.log(imgurl);
@@ -94,7 +94,7 @@ function submit_post(){
 	show_box('Submitting Post...', 0);
 	var content = $('#post').val();
 	if (content == ''){
-		show_box('Please provide some text for your post!', 1);
+		show_box('Post can\'t be empty.', 1);
 		return;
 	}
 	var img = document.getElementById('img');
@@ -158,7 +158,7 @@ function not_in_favorites(ref, path){
 function add_favorite(){
 	var user = firebase.auth().currentUser;
 	if (!user){
-		show_box('Need to be logged in to favorite posts.', 1);
+		show_box('Login to favorite threads.', 1);
 		return;
 	}
 	var path = location.pathname;
