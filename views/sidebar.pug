@@ -20,7 +20,7 @@ block sidebar
 			div#loginbuttons.side-item-clear
 				div.flex-container
 					div.flex
-						button(onclick='show_login()').shadow Login
+						button.shadow(onclick='show_login()') Login
 					div.flex
 						a(href='/user') #[button.shadow Create Account]
 			div#login.side-item.shadow
@@ -29,7 +29,7 @@ block sidebar
 						input(placeholder='email', id='email', type='email')
 						input(placeholder='password', id='password', type='password')
 					div.flex
-						button.right(onclick='login()') Login
+						button.shadow.right(onclick='login()') Login
 
 			div.side-item.shadow
 				h4 Description
@@ -38,7 +38,7 @@ block sidebar
 			div.side-item-clear
 				div.flex-container
 					div.flex
-						button(onclick='show_post()').shadow Create Post
+						button.shadow(onclick='show_post()') Create Post
 					div.flex
 						a(href='/create') #[button.shadow Create Thread]
 
@@ -46,7 +46,7 @@ block sidebar
 				h4 What's on your mind?
 				textarea(rows='4', id='post')
 				input(type='file', id='img', accept='image/*')
-				button.right(onclick='submit_post()') Post
+				button.shadow.right(onclick='submit_post()') Post
 
 			div.side-item.shadow
 				p Threadex is a thread based messaging forum inspired by Reddit. Topics are located at #[code(style='display:inline') ../t/{topic}]
@@ -56,7 +56,7 @@ block sidebar
 				p Trever Cullen #[br] trevercullen@gmail.com
 
 			div#logoutbutton.side-item-clear
-				button(onclick='logout()') Logout
+				button.shadow(onclick='logout()') Logout
 
 		div.loading
 			div.loading-circle

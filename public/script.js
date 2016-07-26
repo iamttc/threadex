@@ -42,7 +42,7 @@ function show_box(input, warn){
 
 // LOGIN LOGOUT STUFF
 function show_login(){
-	$('#login').toggle(600);
+	$('#login').toggle(400);
 }
 function login(){
 	show_box('Logging In...', 0);
@@ -50,8 +50,8 @@ function login(){
 	var password = document.getElementById('password').value;
 	firebase.auth().signInWithEmailAndPassword(email, password).then(function(){
 		show_box('Login Successful', 0);
-		$('#login').hide(600);
-		$('#loginbuttons').hide(600);
+		$('#login').hide(400);
+		$('#loginbuttons').hide(400);
 	}, function(error){
 		var errorCode = error.code;
 		var errorMessage = error.message;
