@@ -23,22 +23,26 @@ block main
 				var pass1 = $('#create_password1').val();
 				var pass2 = $('#create_password2').val();
 
-				if (pass1 != pass2){
-					show_box('Passwords Don\'t Match', 1);
-					return;
+				if (username == ''){
+					show_box('Username can\'t be empty.', 1);
 				}
-				firebase.auth().createUserWithEmailAndPassword(email, pass1)
-					.catch(function(error) {	
-						var errorCode = error.code;
-						var errorMessage = error.message;
-						show_box('Creation Failed: ' + errorMessage, 1);
-				}).then(function(user){
-					show_box('Success. Redirecting...', 0);
-					user.updateProfile({
-						displayName: username
+				else if (pass1 != pass2){
+					show_box('Passwords Don\'t Match', 1);
+				}
+				else {
+					firebase.auth().createUserWithEmailAndPassword(email, pass1)
+						.catch(function(error) {	
+							var errorCode = error.code;
+							var errorMessage = error.message;
+							show_box('Creation Failed: ' + errorMessage, 1);
+					}).then(function(user){
+						show_box('Success. Redirecting...', 0);
+						user.updateProfile({
+							displayName: username
+						});
+						location.pathname = '/';
 					});
-					location.pathname = '/';
-				});
+				}
 			}
 					
 
