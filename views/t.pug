@@ -12,18 +12,23 @@ block main
 				var diff = Math.round((date - post_date) / (1000 * 60));	// minutes
 				var timediff;
 				if (diff < 60)
-					timediff = diff + ' minutes ago';
+					timediff = diff + ' mins';
 				else {
 					diff = Math.round(diff / 60);	// hours
 					if (diff < 24)
-						timediff = diff + ' hours ago';
+						timediff = diff + ' hrs';
 					else {
 						diff = Math.round(diff / 24);	// days
 						if (diff < 365)
-							timediff = diff + ' days ago';
+							timediff = diff + ' dys';
 						else{
-							diff = Math.round(diff / 365);	// years
-							timediff = diff + ' years ago';
+							diff = Math.round(diff / 7);	// weeks
+							if (diff < 52)
+								timediff = diff + ' wks';
+							else{
+								diff = Math.round(diff / 52);
+								timediff = diff + ' yrs';
+							}
 						}
 					}
 				}
@@ -77,21 +82,20 @@ block main
 					var post_date = new Date(val.date);
 					calc_time(post_date, function(timediff){
 						
-
 						// really need to clean up this code
 						// looks like ass
-						var div = "<div class='item shadow' id='" + childsnap.key + "' >";
+						var div = "<div class='item shadow' id='" + childsnap.key + "' >" +
+								"<h4 class='inline'> " + val.name + "</h4>" +
+								"<i class='right'>" + timediff + " </i>";
 						if (val.imgurl != null)
 							div += "<div class='image-wrapper left'>" + 
 									"<img class='post-image' src='" + val.imgurl + "'>" + 
 									"</div>";
-						div += "<h4 class='inline'>" + val.name + "</h4>" +
-								"<i class='right'>" + timediff + "</i>" +
-								"<p>" + val.content + "</p>";
+						div += "<p>" + val.content + "</p>";
 
 						div += "<div class='responses'> " +
 								"<textarea placeholder='Comment'></textarea><br>" +
-								"<button>Submit</button>" +
+								"<button class='right'>Submit</button>" +
 								"</div>"
 						$('.item-container').prepend(div);
 					});
