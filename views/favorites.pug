@@ -25,15 +25,18 @@ block main
 						for (i = 0; i < paths.length; ++i){
 							var x = paths[i];
 							var link = '/t/' + x;
-							var div = "<div class='item shadow'>" +
-								"<a href='" + link + "'><button class='inline right'>" + link + "</button></a>" +
-								"<h4 class='inline'>" + val[x].title + "</h4>" +
-								"<p><i style='margin-bottom: 5px'>" + val[x].favorites + " Favorites</i></p>" +
-								"<p>" + val[x].desc + "</p></div>\n";
+							var div = "<div class='item shadow' id='" + link + "'>" +
+									"<code class='right'>" + link + "</code>" +
+									"<h4 class='inline'>" + val[x].title + "</h4>" +
+									"<p><i style='margin-bottom: 5px'>" + val[x].favorites + " Favorites</i></p>" +
+									"<p>" + val[x].desc + "</p></div>\n";
 							$('.item-container').prepend(div);
 						}
 					}).then(function(){
 						show_result_set();
+						$('.item').click(function(){
+							location.pathname = $(this).attr('id');
+						});
 					});
 				});
 			}

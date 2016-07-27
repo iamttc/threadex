@@ -131,6 +131,11 @@ h4{
 		padding: 20px;
 		border-radius: 2px;
 		background: white;
+		transition: .2s all;
+	}
+	.item:hover{
+		box-shadow: 0px 3px 4px #bbb;
+		cursor: pointer;
 	}
 	.item p{white-space: pre-wrap;}
 	.image-wrapper{
@@ -155,10 +160,6 @@ h4{
 		margin: 0px 5px 0px 0px;
 		max-width: 90%;
 		max-height: 50vh;
-	}
-	.item-hover{
-		transition: .2s all;
-		box-shadow: 0px 3px 4px #bbb;
 	}
 
 
@@ -246,6 +247,7 @@ h4{
 	button:hover{
 		background: #1ba57b;
 		box-shadow: 0px 3px 4px #bbb;
+		cursor: pointer;
 	}
 
 

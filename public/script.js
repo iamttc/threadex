@@ -50,8 +50,8 @@ function login(){
 	var password = document.getElementById('password').value;
 	firebase.auth().signInWithEmailAndPassword(email, password).then(function(){
 		show_box('Login Successful', 0);
-		$('#login').hide(400);
-		$('#loginbuttons').hide(400);
+		$('#login').hide(600);
+		$('#loginbuttons').hide(600);
 	}, function(error){
 		var errorCode = error.code;
 		var errorMessage = error.message;

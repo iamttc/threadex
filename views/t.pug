@@ -112,18 +112,11 @@ block main
 					container.fadeIn(300);
 				});
 
-				$('.item').hover(function(){
-					$(this).addClass('item-hover');
-				}, function(){
-					$(this).removeClass('item-hover');
-				});
-
 				// this really looks like ass lol
 				// add comment post
 				$('.item').click(function(e){
 					var id = $(this).attr('id');
 					$(this).find('.responses').toggle(300, function(){
-
 
 						$(this).find('button').click(function(){
 							var text = $(this).parent().find('textarea').val();

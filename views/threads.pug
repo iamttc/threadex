@@ -7,13 +7,16 @@ block main
 			firebase.database().ref('t').once('value', function(snapshot){
 				snapshot.forEach(function(childsnap){
 					var link = '/t/' + childsnap.key;
-					var div = "<div class='item shadow' style='display:none'>" +
-					"<a href='" + link + "'><button class='inline right'>" + link + "</button></a>" +
-					"<h4 class='inline'>" + childsnap.val().title + "</h4>" +
-					"<p><i style='margin-bottom: 5px'>" + childsnap.val().favorites + " Favorites</i></p>" +
-					"<p>" + childsnap.val().desc + "</p></div>\n";
+					var div = "<div class='item shadow' id='" + link + "'>" +
+							"<code class='right'>" + link + "</code>" +
+							"<h4 class='inline'>" + childsnap.val().title + "</h4>" +
+							"<p><i style='margin-bottom: 5px'>" + childsnap.val().favorites + " Favorites</i></p>" +
+							"<p>" + childsnap.val().desc + "</p></div>\n";
 					$('.item-container').append(div);
 				});
 			}).then(function(){
 				show_result_set();
+				$('.item').click(function(){
+					location.pathname = $(this).attr('id');
+				});
 			});
